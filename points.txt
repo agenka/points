@@ -1,1 +1,11 @@
-.............
+from binance.client import Client
+
+api_key = 'SUA_API_KEY'
+api_secret = 'SEU_API_SECRET'
+
+client = Client(api_key, api_secret)
+
+# Obter o preço atual do Bitcoin em dólares
+btc_price = client.get_symbol_ticker(symbol="BTCUSDT")
+
+print("Preço do Bitcoin em dólares:", btc_price['price'])
