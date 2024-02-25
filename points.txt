@@ -1,11 +1,24 @@
 from binance.client import Client
+from binance.enums import *
 
 api_key = 'SUA_API_KEY'
 api_secret = 'SEU_API_SECRET'
 
 client = Client(api_key, api_secret)
 
-# Obter o preço atual do Bitcoin em dólares
-btc_price = client.get_symbol_ticker(symbol="BTCUSDT")
+# Par de negociação e quantidade desejada
+symbol = 'BTCUSDT'
+quantity = 0.001  # Por exemplo, comprar 0.001 BTC
 
-print("Preço do Bitcoin em dólares:", btc_price['price'])
+# Preço de mercado atual (ou você pode definir um preço específico)
+market_price = client.get_symbol_ticker(symbol=symbol)['price']
+
+# Colocar uma ordem de compra de mercado
+order = client.create_order(
+    symbol=symbol,
+    side=SIDE_BUY,
+    type=ORDER_TYPE_MARKET,
+    quantity=quantity
+)
+
+print("Ordem de compra colocada com sucesso. ID da ordem:", order['orderId'])
