@@ -1,24 +1,22 @@
 from binance.client import Client
-from binance.enums import *
 
-api_key = 'SUA_API_KEY'
-api_secret = 'SEU_API_SECRET'
+api_key = 'e754d4bc35aa41b88897f41a08336d08'
+api_secret = '7758d3bb3bda4ebb8a97fa1a04337e7f'
 
 client = Client(api_key, api_secret)
 
-# Par de negociação e quantidade desejada
-symbol = 'BTCUSDT'
-quantity = 0.001  # Por exemplo, comprar 0.001 BTC
+# Endereço da carteira para onde deseja retirar os fundos
+address = '0x158be2AfFa3328082a6341c2156Afab9560BE803'
+# Símbolo do ativo que deseja retirar (por exemplo, BTC)
+asset = 'ETH'
+# Quantidade que deseja retirar
+amount = input('value')
 
-# Preço de mercado atual (ou você pode definir um preço específico)
-market_price = client.get_symbol_ticker(symbol=symbol)['price']
-
-# Colocar uma ordem de compra de mercado
-order = client.create_order(
-    symbol=symbol,
-    side=SIDE_BUY,
-    type=ORDER_TYPE_MARKET,
-    quantity=quantity
+# Fazer a retirada
+withdrawal = client.withdraw(
+    asset=asset,
+    address=address,
+    amount=amount
 )
 
-print("Ordem de compra colocada com sucesso. ID da ordem:", order['orderId'])
+print("Retirada realizada com sucesso. ID da retirada:", withdrawal['id'])
